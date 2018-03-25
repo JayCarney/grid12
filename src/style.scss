@@ -1,0 +1,19 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+@import 'bootstrap/scss/mixins/breakpoints';
+@import 'grid12';
+
+body{   
+    background-color: #aeaeae;
+    margin: 0;
+}
+
+article {
+    background-color: white;
+}

@@ -1,0 +1,68 @@
+@mixin make-grid12{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: $grid12-space;
+    
+    @include _grid12-make-debug-rules();    
+    
+    > * {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        grid-column: 1 / -1;
+    }
+}
+
+
+@mixin _grid12-make-debug-rules(){
+    .debug &,
+    &.debug{
+        position: relative;
+        &::before{
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(
+                to right,
+                (hsla(204, 80%, 72%, 0.25),
+                hsla(204, 80%, 72%, 0.25) calc((100% / 12) - #{$grid12-space}),
+                transparent calc((100% / 12) - #{$grid12-space}),
+                transparent calc(100% / 12))
+              );
+            background-size: calc(100% + #{$grid12-space}) 100%;
+            z-index: 1000;
+            pointer-events: none;
+        
+        }
+        > * {
+            box-shadow: inset 0px 0px 0px 1px hsla(54, 79%, 72%, 0.55);
+        }
+    }
+}
+
+@mixin _grid12-make-col-rules($prefix){
+    #{$prefix} {
+        @for $i from 1 through 12 {
+            &span-#{$i}{
+                grid-column: auto / span #{$i};
+            }
+    
+            &start-#{$i}{
+                grid-column-start: #{$i};
+            }
+    
+            &end-#{$i}{
+                grid-column-end: #{$i};
+            }
+    
+    
+            @for $j from $i + 1 through 13 {
+                &col-#{$i}-#{$j}{
+                    grid-column: #{$i} / #{$j}
+                }
+            }
+        }
+    }
+}

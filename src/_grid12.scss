@@ -1,0 +1,45 @@
+@import 'variables';
+@import 'mixins';
+
+.grid12{
+    $self: &;
+    @include make-grid12();
+
+    @each $breakpoint in map-keys($grid-breakpoints){
+        // if this breakpoint is 0px, so not set a breakpoint suffix
+        $suffix: if(breakpoint-min($breakpoint, $grid-breakpoints) == null, "", "--#{$breakpoint}");
+        @include media-breakpoint-up($breakpoint){
+            &#{$suffix}{
+                @include make-grid12();
+            }
+        }
+    }
+
+    &--row-space-children{
+        > * {
+            margin-bottom: $grid12-space;            
+        }
+    }
+
+    &--space{
+        padding-bottom: $grid12-space;
+    }
+
+    &--align-top{
+        align-items: start;
+    }
+}
+
+// generate column classes for each breakpoint
+@each $breakpoint in map-keys($grid-breakpoints){
+    // if this breakpoint is 0px, so not set a breakpoint prefix
+    $infix: if(breakpoint-min($breakpoint, $grid-breakpoints) == null, "", "#{$breakpoint}-");
+
+    @include media-breakpoint-up($breakpoint){
+        @include _grid12-make-col-rules('.grid12__#{$infix}');
+    }
+
+    @include media-breakpoint-only($breakpoint){
+        @include _grid12-make-col-rules('.grid12__#{$breakpoint}-only-');
+    }
+}
