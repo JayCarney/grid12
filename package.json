@@ -1,8 +1,9 @@
 {
   "name": "cssgrid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
+  "style": "src/style.scss",
   "dependencies": {},
   "devDependencies": {
     "node-sass": "^4.7.2",
