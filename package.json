@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "bootstrap": "^4.0.0",
     "node-sass": "^4.7.2",
     "node-watch": "^0.5.8"
   },
